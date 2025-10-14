@@ -1,7 +1,6 @@
 import { ConflictException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { EventAttende, EventDto } from './dto/event.dto';
-import { User } from 'generated/prisma';
 import { PrismaClientKnownRequestError, PrismaClientValidationError } from 'generated/prisma/runtime/library';
 
 @Injectable()
@@ -10,12 +9,11 @@ export class EventService {
 
     constructor(private prisma:PrismaService){}
 
-    async createEvent(userId: string,eventDetails:EventDto){
+    async createEvent(eventDetails:EventDto){
 
         try{
             const event = await this.prisma.event.create({
                 data:{
-                    userId,
                     name:eventDetails.name,
                     location:eventDetails.name,
                     start_time:eventDetails.startTime,
@@ -33,14 +31,11 @@ export class EventService {
     }
 
 
-    async getAllEvent(userId: string){
+    async getAllEvent(){
 
         try{
 
             const events = await this.prisma.event.findMany({
-                where:{
-                    userId
-                }
             })
             return events
         }
