@@ -42,13 +42,15 @@ Swagger API documentation is available at:
 
 ## 🧩 API Endpoints
 
-### 1️⃣ Create Event
-**POST** `/events`
-```json
-{
-  "name": "Tech Summit 2025",
-  "location": "Mumbai",
-  "start_time": "2025-12-05T10:00:00Z",
-  "end_time": "2025-12-05T18:00:00Z",
-  "max_capacity": 100
-}
+### 1️⃣ User Authentication
+
+#### Signup
+curl --location 'http://localhost:4000/auth/signup'
+--header 'Content-Type: application/json'
+--header 'X-API-Key: {{token}}'
+--data-raw '{
+"firstName":"Raja",
+"lastName":"Pathak",
+"password":"Aryan@12345",
+"email":"aryan@sustvest.com"
+}'
