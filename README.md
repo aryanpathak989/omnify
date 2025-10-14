@@ -54,3 +54,62 @@ curl --location 'http://localhost:4000/auth/signup'
 "password":"Aryan@12345",
 "email":"aryan@sustvest.com"
 }'
+
+
+
+#### Login
+
+curl --location 'http://localhost:4000/auth/login'
+--header 'Content-Type: application/json'
+--header 'X-API-Key: {{token}}'
+--header 'Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NjQ5OWU2Yi1iMmRhLTQzYmEtOTk3My00MDg3ZTEyZTNkZGMiLCJpYXQiOjE3NjA0NjUyMTAsImV4cCI6MTc2MDQ2NjExMH0.n7SSBuEIKTwE8Hd9MlXY9mciJwqM8zKNDb-h7X5SyPk; refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NjQ5OWU2Yi1iMmRhLTQzYmEtOTk3My00MDg3ZTEyZTNkZGMiLCJpYXQiOjE3NjA0NjUyMTAsImV4cCI6MTc2MTA3MDAxMH0.95y7lNCDjpRF2d3WBNCV9RroePw8b5PEm4R7lfPajOA'
+--data-raw '{
+"password":"Aryan@12345",
+"email":"aryan@sustvest.com"
+}'
+
+
+
+### 2️⃣ Events
+
+#### Create Event
+**POST** `/events`
+
+curl --location 'http://localhost:4000/events'
+--header 'Content-Type: application/json'
+--header 'X-API-Key: {{token}}'
+--header 'Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NjQ5OWU2Yi1iMmRhLTQzYmEtOTk3My00MDg3ZTEyZTNkZGMiLCJpYXQiOjE3NjA0NjUyMTAsImV4cCI6MTc2MDQ2NjExMH0.n7SSBuEIKTwE8Hd9MlXY9mciJwqM8zKNDb-h7X5SyPk; refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NjQ5OWU2Yi1iMmRhLTQzYmEtOTk3My00MDg3ZTEyZTNkZGMiLCJpYXQiOjE3NjA0NjUyMTAsImV4cCI6MTc2MTA3MDAxMH0.95y7lNCDjpRF2d3WBNCV9RroePw8b5PEm4R7lfPajOA'
+--data '{
+"name":"Music Event",
+"location":"Banglore",
+"startTime":"12:00:00",
+"endTime":"13:00:00",
+"max_capacity":30
+}'
+
+
+#### Get All Events
+curl --location 'http://localhost:4000/events'
+--header 'X-API-Key: {{token}}'
+--header 'Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NjQ5OWU2Yi1iMmRhLTQzYmEtOTk3My00MDg3ZTEyZTNkZGMiLCJpYXQiOjE3NjA0NjUyMTAsImV4cCI6MTc2MDQ2NjExMH0.n7SSBuEIKTwE8Hd9MlXY9mciJwqM8zKNDb-h7X5SyPk; refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NjQ5OWU2Yi1iMmRhLTQzYmEtOTk3My00MDg3ZTEyZTNkZGMiLCJpYXQiOjE3NjA0NjUyMTAsImV4cCI6MTc2MTA3MDAxMH0.95y7lNCDjpRF2d3WBNCV9RroePw8b5PEm4R7lfPajOA'
+
+
+---
+
+### 3️⃣ Attendees
+
+#### Register Attendee for an Event
+curl --location 'http://localhost:4000/events/10a19188-2eb4-4098-b825-2f5fff351f30/register'
+--header 'Content-Type: application/json'
+--header 'X-API-Key: {{token}}'
+--header 'Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NjQ5OWU2Yi1iMmRhLTQzYmEtOTk3My00MDg3ZTEyZTNkZGMiLCJpYXQiOjE3NjA0NjUyMTAsImV4cCI6MTc2MDQ2NjExMH0.n7SSBuEIKTwE8Hd9MlXY9mciJwqM8zKNDb-h7X5SyPk; refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NjQ5OWU2Yi1iMmRhLTQzYmEtOTk3My00MDg3ZTEyZTNkZGMiLCJpYXQiOjE3NjA0NjUyMTAsImV4cCI6MTc2MTA3MDAxMH0.95y7lNCDjpRF2d3WBNCV9RroePw8b5PEm4R7lfPajOA'
+--data-raw '{
+"name":"Aryan Dubey",
+"email":"AryanPathak@gmail.com"
+}'
+
+
+#### Get All Attendees for an Event
+curl --location 'http://localhost:4000/events/10a19188-2eb4-4098-b825-2f5fff351f30/attendees'
+--header 'X-API-Key: {{token}}'
+--header 'Cookie: access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NjQ5OWU2Yi1iMmRhLTQzYmEtOTk3My00MDg3ZTEyZTNkZGMiLCJpYXQiOjE3NjA0NjUyMTAsImV4cCI6MTc2MDQ2NjExMH0.n7SSBuEIKTwE8Hd9MlXY9mciJwqM8zKNDb-h7X5SyPk; refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NjQ5OWU2Yi1iMmRhLTQzYmEtOTk3My00MDg3ZTEyZTNkZGMiLCJpYXQiOjE3NjA0NjUyMTAsImV4cCI6MTc2MTA3MDAxMH0.95y7lNCDjpRF2d3WBNCV9RroePw8b5PEm4R7lfPajOA'
