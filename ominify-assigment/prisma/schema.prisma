@@ -23,6 +23,7 @@ model Event {
   start_time  String
   end_time    String
   max_capcity Int    @default(10)
+  createdAt   DateTime @default(now())
 
   EventAttendees EventAttendees[]
 

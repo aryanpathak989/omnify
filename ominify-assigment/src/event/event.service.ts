@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { EventAttende, EventDto } from './dto/event.dto';
 import { PrismaClientKnownRequestError, PrismaClientValidationError } from 'generated/prisma/runtime/library';
@@ -12,6 +12,8 @@ export class EventService {
     async createEvent(eventDetails:EventDto){
 
         try{
+
+            console.log("Starting event")
             const event = await this.prisma.event.create({
                 data:{
                     name:eventDetails.name,
@@ -21,6 +23,8 @@ export class EventService {
                     max_capcity:eventDetails.max_capacity
                 }
             })
+
+            console.log(event)
 
             return event
         }
@@ -49,6 +53,21 @@ export class EventService {
 
         try{
 
+            const eventDetails = await this.prisma.event.findUnique({
+                where:{
+                    id:eventId
+                }
+            })
+
+            const countEventAttende = await this.prisma.eventAttendees.count({
+                where:{
+                    event_id:eventId
+                }
+            })
+
+            if(countEventAttende+1>eventDetails?.max_capcity!){
+                throw new BadRequestException("Event is over booked")
+            }
             const response  = await this.prisma.eventAttendees.create({
                 data:{
                     name: eventAttende.name,
@@ -65,6 +84,9 @@ export class EventService {
                 if (err.code === "P2002") {
                     throw new ConflictException("Email already exists");
                 }
+            }
+            if(err instanceof BadRequestException){
+                throw new BadRequestException("Event is over booked")
             }
               throw new InternalServerErrorException("Something went wrong");
         }

@@ -9,6 +9,7 @@ export class EventController {
 
     @Post("/")
     async createEvent( @Body() event: EventDto){
+        console.log({event})
         return await this.eventService.createEvent(event)
     }
 
